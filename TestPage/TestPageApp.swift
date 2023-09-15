@@ -11,7 +11,7 @@ import SwiftUI
 struct TestPageApp: App {
     var body: some Scene {
         WindowGroup {
-            ProfileView()
+            TabbarView()
         }
     }
 }

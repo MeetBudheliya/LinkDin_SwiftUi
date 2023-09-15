@@ -16,8 +16,16 @@ struct ProfileView: View {
     @State private var shouldShowImage = false
     @State var PencilImage: UIImage?
     @State private var showingAlert = false
-    //@State private var SettingView = SettingsView()
+    @State private var showDetails = false
+    @State private var downloadAmount = 0.0
+    @State private var progressValue: Double = 0
         @State var image: UIImage?
+    @State var text = ""
+    @State private var alertShow = false
+    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+
+    
     var body: some View {
         NavigationView{
         VStack (alignment: .leading,spacing: 12){
@@ -79,10 +87,18 @@ struct ProfileView: View {
                 VStack {
                     activityView
                 }
+                
+                VStack {
+                    lineView
+                }
+                
+                VStack {
+                    ExperienceView
+                }
             }
-            MainTab()
-        }
-    }}
+          }
+       }
+    }
 }
 
 extension ProfileView {
@@ -106,10 +122,10 @@ extension ProfileView {
 //                    .font(.subheadline)
                 
                 TextField("Search", text: $placeHolder)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.black)
                 
             }
-            
+
             Spacer()
             
             VStack {
@@ -314,38 +330,73 @@ extension ProfileView {
     var detailsView: some View {
         ZStack(alignment: .bottomLeading) {
             Color(.lightText)
-            HStack {
-                VStack (spacing: 5){
-                    Text("Open to work")
-                        .foregroundColor(.black)
-                        .font(.subheadline)
-                        .padding(.trailing)
-                    
+                    VStack(spacing: 3) {
+                HStack {
+                        Text("Open to work")
+                            .foregroundColor(.black)
+                            .font(.subheadline)
+                    Spacer()
+                        
+                    HStack {
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "pencil")
+                                .foregroundColor(.black)
+                                .padding(.trailing)
+                        }
+                    }
+                }.padding(.leading)
+                        
+                HStack {
                     Text("iOS App Developer")
                         .foregroundColor(.black)
                         .font(.caption)
-                    
-                    Button {
+                    Spacer()
+                }.padding(.leading)
                         
-                    } label: {
-                        Text("Show details")
-                            .foregroundColor(.blue).bold()
-                            .font(.subheadline)
-                    }
+                        Button {
+                            showDetails.toggle()
+                        } label: {
+                            if showDetails {
+                                
+                            }else{
+                                HStack {
+                                    Text("Show details")
+                                        .foregroundColor(.blue).bold()
+                                        .font(.subheadline)
+                                    Spacer()
+                                }.padding(.leading)
+                            }
+                        }
+                if showDetails {
+                    HStack {
+                        VStack {
+                            Text("iOS App Developer")
+                            Text("iOS App Developer")
+                            Text("iOS App Developer")
+                            Text("iOS App Developer")
+                            
+                            Button {
+                                showDetails = false
+                            } label: {
+                                Text("Show less")
+                                    .foregroundColor(.blue).bold()
+                                    .font(.subheadline)
+                            }
+
+                        }.font(.caption)
+                            .foregroundColor(.black)
+                        Spacer()
+                    }.padding(.leading)
+                }else {
                     
                 }
-                Spacer()
+
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "pencil")
-                        .padding(.trailing)
-                }
-            }.padding(.leading)
-            
+            }
         }
-        .frame(width: 360, height: 70)
+        //.frame(width: 360, height: 70)
         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue,lineWidth: 0.75))
         .padding(.trailing)
         .padding(.leading)
@@ -381,18 +432,73 @@ extension ProfileView {
             
             //progress
             VStack {
+                
+                
                 HStack {
                     Text("Intermediate")
                     Spacer()
                 }.padding(.leading)
                 
                 HStack {
-                    SwiftUI.ProgressView(value: 50, total: 100)
-                        .scaleEffect(x: 1, y: 5, anchor: .center)
-                    
-                    Text("5/7")
+                    VStack(spacing: 20) {
+                        HStack {
+                            TextField("0", text: $text)
+                                .foregroundColor(.black)
+                                .frame(height: 30)
+                                .border(.black, width: 2)
+                            
+                            Button {
+                                if Int(text) ?? 0 > 10 {
+                                    self.alertShow = true
+                                }else{
+                                    progressValue = Double(text) ?? 0.0
+                                }
+                            } label: {
+                                Text("Go")
+                                    .frame(width: 30, height: 30)
+                                    .border(.black, width: 2)
+                                    .foregroundColor(.black)
+                            }.alert(isPresented: $alertShow) {
+                                Alert(title: Text("Progress is not valid"), dismissButton: .cancel({
+                                    progressValue = 0.0
+                                }))
+                            }
+
+                        }
+                        SwiftUI.ProgressView(value: progressValue, total: 10)
+                            .scaleEffect(x: 1, y: 5, anchor: .center)
+                    }
+
                 }.padding(.leading)
-                .padding(.trailing)
+                    .padding(.trailing)
+
+                
+//                HStack {
+//
+//
+//                    Button {
+//                        if downloadAmount < 10 {
+//                            //downloadAmount+=1
+//                        }else{
+//                            //downloadAmount = 0
+//                        }
+//
+//
+//                    } label: {
+//                        HStack {
+//                            let remove = Int(downloadAmount)
+//                            Text("\(remove) / 10")
+//                        }
+//                            .foregroundColor(.black)
+//                    }
+//
+//                }.padding(.leading)
+//                .padding(.trailing)
+//                .onReceive((timer)) { _ in
+//                    if downloadAmount < 10 {
+//                        downloadAmount+=1
+//                    }
+//                }
                 
                 HStack(spacing: 5) {
                     Text("Complete 3 Step to achieve")
@@ -587,7 +693,7 @@ extension ProfileView {
                             if showMe {
                                 
                             }else{
-                                Text("Show all 5 resources")
+                                Text("Show all 5 resources ->")
                                     .foregroundColor(.black)
                             }
                         }
@@ -729,12 +835,85 @@ extension ProfileView {
                                 
                                 Spacer()
                             }.padding(.leading)
+                            
+                            Divider()
+                            
+                            Button("Show less") {
+                                showActvity = false
+                            }.foregroundColor(.black)
                         }else {
                             
                         }
                         
                         }
                     }
+            }
+        }
+    }
+    
+    var ExperienceView: some View {
+        VStack {
+            HStack {
+                HStack {
+                    Text("Experience")
+                        .font(.headline).bold()
+                    Spacer()
+                }.padding(.leading,30)
+                
+                HStack(spacing: 20) {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "pencil")
+                    }
+                }.padding(.trailing)
+                 .foregroundColor(.black)
+            }
+            VStack {
+                HStack {
+                    HStack {
+                        Image(systemName: "arrow.down.left.topright.rectangle")
+                            .foregroundColor(.black)
+                    }.padding(.leading)
+                    
+                    VStack {
+                        Text("Flutter Developer")
+                            .font(.subheadline)
+                        
+                        HStack {
+                            Text("ORS TECHNOLOGY")
+                                .font(.footnote)
+                                .foregroundColor(.black).opacity(0.7)
+                                .padding(.leading,70)
+                            
+                            Text(". Full-time")
+                                .font(.footnote)
+                        }
+                        
+                        HStack {
+                            Text("Jul 2022 - present . 1 yr 3 mos")
+                                .font(.footnote)
+                                .foregroundColor(.gray)
+                                .padding(.leading,70)
+                        }
+                    }
+                    
+                }.padding(.leading,-130)
+                
+                VStack {
+                    HStack {
+                        Text("Skills: Dart . Flutter . C (Programming Language) . Computer Progamming")
+                            .foregroundColor(.black)
+                            .font(.footnote)
+                    }.padding(.leading,73)
+                        .padding(.trailing,20)
+                }
             }
         }
     }

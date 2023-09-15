@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD36ACF72AB48A070081EF1E /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD36ACF62AB48A070081EF1E /* TabbarView.swift */; };
 		BD4303662AB2FCF100DA86CF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4303652AB2FCF100DA86CF /* SettingsView.swift */; };
 		BD5668BA2AB0A994004CF184 /* NextPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5668B92AB0A994004CF184 /* NextPageView.swift */; };
 		BD7723EE2AB03C1200747FB5 /* TestPageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD7723ED2AB03C1200747FB5 /* TestPageApp.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD36ACF62AB48A070081EF1E /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		BD4303652AB2FCF100DA86CF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BD5668B92AB0A994004CF184 /* NextPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPageView.swift; sourceTree = "<group>"; };
 		BD7723EA2AB03C1200747FB5 /* TestPage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestPage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				BDBFDA092AB03C51009856B0 /* MainTab .swift */,
+				BD36ACF62AB48A070081EF1E /* TabbarView.swift */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				BDC48CF52AB1990C005769E8 /* PostView.swift in Sources */,
 				BDC48CF72AB1992A005769E8 /* NetworkView.swift in Sources */,
 				BDC48CEF2AB19887005769E8 /* JobsView.swift in Sources */,
+				BD36ACF72AB48A070081EF1E /* TabbarView.swift in Sources */,
 				BD4303662AB2FCF100DA86CF /* SettingsView.swift in Sources */,
 				BD7723F02AB03C1200747FB5 /* ContentView.swift in Sources */,
 				BDBFDA0A2AB03C51009856B0 /* MainTab .swift in Sources */,

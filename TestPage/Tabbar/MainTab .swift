@@ -8,37 +8,37 @@
 import SwiftUI
 
 struct MainTab: View {
-    @State private var selected = 0
+
     var body: some View {
-        HStack() {
+//        HStack() {
             VStack{
                 Image(systemName: "house")
                 Text("Home")
             }
-            Spacer()
+//            Spacer()
             VStack {
                 Image(systemName: "chart.bar")
                 Text("My Network")
             }
-            Spacer()
-            VStack {
-                Image(systemName: "cross.circle")
-                Text("Post")
-            }
-            Spacer()
-            VStack {
-                Image(systemName: "bell")
-                Text("Notificatons")
-            }
-            Spacer()
-            VStack {
-                Image(systemName: "bag")
-                Text("Jobs")
-            }
-        }
-        .font(.footnote)
-        .padding(20)
-        .frame(height: 20)
+//            Spacer()
+//            VStack {
+//                Image(systemName: "cross.circle")
+//                Text("Post")
+//            }
+//            Spacer()
+//            VStack {
+//                Image(systemName: "bell")
+//                Text("Notificatons")
+//            }
+//            Spacer()
+//            VStack {
+//                Image(systemName: "bag")
+//                Text("Jobs")
+//            }
+//        }
+//        .font(.footnote)
+//        .padding(20)
+//        .frame(height: 20)
     }
 }
 
