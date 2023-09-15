@@ -10,6 +10,14 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
+            NavigationView {
+                NavigationLink {
+                    ProfileView()
+                } label: {
+                    Text("Profile")
+                }
+
+            }
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)

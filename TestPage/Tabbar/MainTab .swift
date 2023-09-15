@@ -38,6 +38,7 @@ struct MainTab: View {
         }
         .font(.footnote)
         .padding(20)
+        .frame(height: 20)
     }
 }
 
